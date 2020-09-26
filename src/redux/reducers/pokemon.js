@@ -1,7 +1,8 @@
-import { GET_POKEMON } from '../action-types';
+import { GET_POKEMON, GET_POKEMON_ITEM } from '../action-types';
 
 const init_state = {
-    pokemon: []
+    pokemon: [],
+    pokemon_item: {}
 }
 
 export default function(state = init_state, action) {
@@ -11,6 +12,11 @@ export default function(state = init_state, action) {
                 ...state,
                 pokemon: action.payload
             };
+        case GET_POKEMON_ITEM:
+            return {
+                ...state,
+                pokemon_item: action.payload
+            }
     
         default:
             return state;
