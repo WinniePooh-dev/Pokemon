@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import Api from "../../api";
 import * as actions from "../../redux/actions";
+import { FilterItems } from "../filter-items";
 
 import './style.scss';
 
@@ -14,16 +15,19 @@ class PokemonList extends Component {
     render() {
         const { pokemon, history } = this.props;
         return (
-            <ul className={'pokemon-list'}>
-                {pokemon.length && pokemon.slice(0, 20).map(pokemon => {
-                    const id = pokemon.url.slice(0,-1).match(/\d+$/ig).toString();
-                    return (
-                        <li key={id} onClick={() => history.push(`/pokemon-list/${id}`)}>
-                            {this.renderPokemon(pokemon)}
-                        </li>
-                    )
-                })}
-            </ul>
+            <Fragment>
+                <ul className={'pokemon-list'}>
+                    {pokemon.length && pokemon.slice(0, 20).map(pokemon => {
+                        const id = pokemon.url.slice(0,-1).match(/\d+$/ig).toString();
+                        return (
+                            <li key={id} onClick={() => history.push(`/pokemon-list/${id}`)}>
+                                {this.renderPokemon(pokemon)}
+                            </li>
+                        )
+                    })}
+                </ul>
+                <FilterItems/>
+            </Fragment>
         )
     }
 

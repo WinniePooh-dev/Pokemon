@@ -1,13 +1,15 @@
 @import "../../variables.scss";
 
 .pokemon-list {
+    margin: $normalPadding*6.5 0 0;
+    width: 50%;
+
     & li {
         list-style-type: none;
     }
 }
 
 .pokemon-list-item {
-    width: 50%;
     display: flex;
     margin: ceil($normalPadding*.66);
     text-align: left;
