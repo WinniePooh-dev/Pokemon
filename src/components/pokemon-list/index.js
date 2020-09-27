@@ -52,7 +52,11 @@ class PokemonList extends Component {
         )
     }
 
-    renderPokemon = pokemon => <div className={'pokemon-list-item'}>{ pokemon.name }</div>
+    renderPokemon = pokemon => (
+    <div className={'pokemon-list-item'}>
+        <span>{ pokemon.name }</span>
+        <img src={`http://placeimg.com/150/150/${pokemon.name}`} alt='None'/>
+    </div>)
 }
 
 const mapStateToProps = ({ pokemon }) => {
