@@ -5,7 +5,7 @@ import "./style.scss";
 
 export const ToHome = () => {
     return (
-        <Link className={'to-home'} to={"/pokemon-list"}>
+        <Link className={'go-to'} to={"/pokemon-list"}>
             To Home
         </Link>
     )
