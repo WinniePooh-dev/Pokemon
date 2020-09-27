@@ -1,5 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Api from "../../api";
 import { getPokemonItem } from "../../redux/actions";
 import { ToHome } from "../to-home";
@@ -22,16 +23,16 @@ export const PokemonItem = ({ match }) => {
         <Fragment>
             <ToHome/>
             <ul className={'pokemon-info'}>
-                {console.log(pokemon_item)}
                 <li><span>name:</span>{pokemon_item.name}</li>
                 {pokemon_item.color && <li><span>color:</span>{pokemon_item.color.name}</li>}
                 {pokemon_item.effect_entries && <li><span>effect entries:</span>{pokemon_item.effect_entries[1].effect}</li>}
                 {pokemon_item.effect_entries && <li><span>short effect:</span>{pokemon_item.effect_entries[1].short_effect}</li>}
-                {pokemon_item.evolution_chain && <li><span>evolution chain:</span><a href={pokemon_item.evolution_chain.url}>{pokemon_item.evolution_chain.url}</a></li>}
+                {pokemon_item.evolution_chain && <li><span>evolution chain:</span><Link to={`/pokemon-list/${match.params.id}/evolution-chain`}>
+                {pokemon_item.evolution_chain.url}</Link></li>}
                 {<li><span>base happiness:</span>{pokemon_item.base_happiness}</li>}
                 {<li><span>capture rate:</span>{pokemon_item.capture_rate}</li>}
                 <li><span>is legendary:</span>{!!pokemon_item.is_legendary ? 'Yes' : 'Not'}</li>
-                {pokemon_item.evolves_from_species ? <li><span>evolves from species:</span>{pokemon_item.evolves_from_species}</li> : null}
+                {pokemon_item.evolves_from_species ? <li><span>evolves from species:</span>{pokemon_item.evolves_from_species.name}</li> : null}
                 {pokemon_item.egg_groups && <li><span>egg groups:</span>{pokemon_item.egg_groups[0].name}</li>}
                 {pokemon_item.flavor_text_entries && <li><span>flavor text entries:</span>{pokemon_item.flavor_text_entries[42].flavor_text}</li>}
                 {pokemon_item.pal_park_encounters && <li><span>pal park encounters:</span>{pokemon_item.pal_park_encounters[0].area.name}</li>}

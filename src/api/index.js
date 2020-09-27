@@ -3,7 +3,7 @@ import axios from "axios";
 export default class Api {
     static loadPokemon = async () => {
         const response = await axios.get('https://pokeapi.co/api/v2/generation/1/').then(response => response.data.pokemon_species).catch(error => console.log(error));
-        return response
+        return response;
     };
 
     loadPokemonItem = async id => {
@@ -20,4 +20,11 @@ export default class Api {
             throw new Error(error)
         }
     };
+
+    loadEvolutionChain = async id => {
+        const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/${id}/`)
+        .then(response => response.data)
+        .catch(error => console.log(error))
+        return response;
+    }
 };

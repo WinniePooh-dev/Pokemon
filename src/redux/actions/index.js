@@ -13,3 +13,10 @@ export const getPokemonItem = pokemon_item => {
         payload: pokemon_item
     }
 }
+
+export const getEvolutionChain = evolution_chain => {
+    return {
+        type: action_types.GET_EVOLUTION_CHAIN,
+        payload: evolution_chain
+    }
+}
