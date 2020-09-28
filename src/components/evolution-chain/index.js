@@ -11,11 +11,13 @@ const { loadEvolutionChain } = new Api();
 
 const EvolutionChain = ({ match }) => {
 
+    const url = useSelector(state => state.pokemon.url);
+
     const dispatch = useDispatch();
 
     useEffect(() => {
-        loadEvolutionChain(match.params.id).then(data => dispatch(getEvolutionChain(data))).catch(er => console.log(er))
-    }, [dispatch, match.params.id]);
+        loadEvolutionChain(url).then(data => dispatch(getEvolutionChain(data))).catch(er => console.log(er));
+    }, [dispatch, match.params.id, url]);
 
     const evolution_chain = useSelector(state => state.pokemon.evolution_chain);
     const pokemon_name = useSelector(state => state.pokemon.pokemon_item.name);

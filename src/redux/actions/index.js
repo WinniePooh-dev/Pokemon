@@ -20,3 +20,10 @@ export const getEvolutionChain = evolution_chain => {
         payload: evolution_chain
     }
 }
+
+export const getURL = url => {
+    return {
+        type: action_types.GET_URL,
+        payload: url
+    }
+}

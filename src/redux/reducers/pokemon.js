@@ -1,9 +1,10 @@
-import { GET_EVOLUTION_CHAIN, GET_POKEMON, GET_POKEMON_ITEM } from '../action-types';
+import { GET_EVOLUTION_CHAIN, GET_POKEMON, GET_POKEMON_ITEM, GET_URL } from '../action-types';
 
 const init_state = {
     pokemon: [],
     pokemon_item: {},
-    evolution_chain: {}
+    evolution_chain: {},
+    url: ''
 }
 
 export default function(state = init_state, action) {
@@ -22,6 +23,11 @@ export default function(state = init_state, action) {
             return {
                 ...state,
                 evolution_chain: action.payload
+            }
+        case GET_URL:
+            return {
+                ...state,
+                url: action.payload
             }
     
         default:

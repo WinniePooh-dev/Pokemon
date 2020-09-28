@@ -21,10 +21,10 @@ export default class Api {
         }
     };
 
-    loadEvolutionChain = async id => {
-        const response = await axios.get(`https://pokeapi.co/api/v2/evolution-chain/${id}/`)
-        .then(response => response.data)
-        .catch(error => console.log(error))
+    loadEvolutionChain = async url => {
+        const response = await axios.get(url)
+            .then(response => response.data)
+                 .catch(error => console.log(error))
         return response;
     }
 };

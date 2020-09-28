@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Api from "../../api";
-import { getPokemonItem } from "../../redux/actions";
+import { getPokemonItem, getURL } from "../../redux/actions";
 import { ToHome } from "../to-home";
 
 import "./style.scss";
@@ -14,7 +14,11 @@ export const PokemonItem = ({ match }) => {
     const dispatch = useDispatch();
     
     useEffect(() => {
-        loadPokemonItem(match.params.id).then(data => dispatch(getPokemonItem(data))).catch(console.error());
+        loadPokemonItem(match.params.id).then(data => {
+            dispatch(getPokemonItem(data));
+            return data;
+        })
+        .then(data => dispatch(getURL(data.evolution_chain.url))).catch(console.error());
     }, [match.params.id, dispatch]);
 
     const pokemon_item = useSelector(state => state.pokemon.pokemon_item);
