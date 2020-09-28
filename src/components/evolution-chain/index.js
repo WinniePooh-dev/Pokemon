@@ -18,6 +18,7 @@ const EvolutionChain = ({ match }) => {
     }, [dispatch, match.params.id]);
 
     const evolution_chain = useSelector(state => state.pokemon.evolution_chain);
+    const pokemon_name = useSelector(state => state.pokemon.pokemon_item.name);
     
     return (
         <div className={'evolution-chain'}>
@@ -30,6 +31,7 @@ const EvolutionChain = ({ match }) => {
                 <li><span>trigger:</span>{evolution_chain.chain.evolves_to[0].evolution_details[0].trigger.name}</li>
                 <li><span>turn upside down:</span>{evolution_chain.chain.evolves_to[0].evolution_details[0].turn_upside_down ? 'Yes' : 'Not'}</li>
             </ul> : null}
+            <img src={`http://placeimg.com/950/950/${pokemon_name}`} alt='None'/>
         </div>
     )
 }
