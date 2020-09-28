@@ -16,9 +16,9 @@ export const PokemonItem = ({ match }) => {
     useEffect(() => {
         loadPokemonItem(match.params.id).then(data => {
             dispatch(getPokemonItem(data));
-            return data;
+            return data.evolution_chain.url;
         })
-        .then(data => dispatch(getURL(data.evolution_chain.url))).catch(console.error());
+        .then(url => dispatch(getURL(url))).catch(console.error());
     }, [match.params.id, dispatch]);
 
     const pokemon_item = useSelector(state => state.pokemon.pokemon_item);
