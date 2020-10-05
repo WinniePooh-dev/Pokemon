@@ -17,7 +17,7 @@ export default class Api {
                 ...species
             }
         } catch (error) {
-            throw new Error(error)
+            throw new Error(error);
         }
     };
 
