@@ -38,7 +38,7 @@ function PokemoList ({ name, color, effect_entries, evolution_chain, base_happin
         
         const match = useRouteMatch('/pokemon-list/:id');
 
-        const renederItems = Object.entries({ name, color, effect_entries, evolution_chain, base_happiness,
+        const renederPokemon = Object.entries({ name, color, effect_entries, evolution_chain, base_happiness,
             capture_rate, is_legendary, evolves_from_species, egg_groups, flavor_text_entries,
             pal_park_encounters, shape, growth_rate, habitat, hatch_counter, is_baby, is_main_series,
             is_mythical, effect_changes }).map(([key, value]) => {
@@ -120,7 +120,7 @@ function PokemoList ({ name, color, effect_entries, evolution_chain, base_happin
             
     return (
         <ul className={'pokemon-info'}>
-            {renederItems}
+            {renederPokemon}
         </ul>
     )
 }
