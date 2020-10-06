@@ -35,41 +35,92 @@ function PokemoList ({ name, color, effect_entries, evolution_chain, base_happin
     capture_rate, is_legendary, evolves_from_species, egg_groups, flavor_text_entries,
     pal_park_encounters, shape, growth_rate, habitat, hatch_counter, is_baby, is_main_series,
     is_mythical, effect_changes }) {
+        
         const match = useRouteMatch('/pokemon-list/:id');
+
+        const renederItems = Object.entries({ name, color, effect_entries, evolution_chain, base_happiness,
+            capture_rate, is_legendary, evolves_from_species, egg_groups, flavor_text_entries,
+            pal_park_encounters, shape, growth_rate, habitat, hatch_counter, is_baby, is_main_series,
+            is_mythical, effect_changes }).map(([key, value]) => {
+
+                switch (true) {
+                    case (typeof value !== 'boolean' && !value) || (!value.length && Array.isArray(value)):
+                        return null;
+
+                    case typeof value === "object" && !Array.isArray(value) && key !== 'evolution_chain':
+                        return (
+                            <li key={key}>
+                                <span>{key}:</span>{value.name}
+                            </li>
+                        );
+
+                    case key === 'evolution_chain':
+                        return <li key={key}><span>{key}:</span><Link to={`/pokemon-list/${match.params.id}/evolution-chain`}>{value.url}</Link></li>
+
+                    case key === 'effect_entries':
+                        return (
+                            <li key={key}>
+                                <span>{key}:</span>{value[1].short_effect}
+                            </li>
+                        );
+
+                    case key === 'egg_groups':
+                        if (value.length > 1) {
+                            return (
+                                <li key={key}>
+                                    <span>{key}:</span>{`${value[0].name}/${value[1].name}`}
+                                </li>
+                            )
+                        }
+                        return (
+                            <li key={key}>
+                                <span>{key}:</span>{value[0].name}
+                            </li>
+                        );
+
+                    case key === 'flavor_text_entries':
+                        return (
+                            <li key={key}>
+                                <span>{key}:</span>{value[42].flavor_text}
+                            </li>
+                        );
+
+                    case key === 'pal_park_encounters':
+                        return (
+                            <li key={key}>
+                                <span>{key}:</span>{value[0].area.name}
+                            </li>
+                        );
+
+                    case typeof value === 'boolean':
+                        return <li key={key}><span>{key}:</span>{value ? 'Yes' : 'Not'}</li>
+
+                    case key === 'effect_changes':
+                        return (
+                            <li key={key}>
+                                <br/>
+                                <h3><span>{key}:</span></h3>
+                                <br/>
+                                <span>effect entries:</span>{value[0].effect_entries[1].effect}
+                                <br/>
+                                <span>version group:</span>{value[0].version_group.name}
+                                <br/>
+                                {value[1] && <div>
+                                    <span>effect entries:</span>{value[1].effect_entries[1].effect}
+                                    <br/>
+                                    <span>version group:</span>{value[1].version_group.name}
+                                </div>}
+                            </li>
+                        );
+
+                    default:
+                        return <li key={key}><span>{key}:</span>{value}</li>
+                }
+            });
+            
     return (
         <ul className={'pokemon-info'}>
-            <li><span>name:</span>{name}</li>
-            {color && <li><span>color:</span>{color.name}</li>}
-            {effect_entries && <li><span>effect entries:</span>{effect_entries[1].effect}</li>}
-            {effect_entries && <li><span>short effect:</span>{effect_entries[1].short_effect}</li>}
-            {evolution_chain && <li><span>evolution chain:</span><Link to={`/pokemon-list/${match.params.id}/evolution-chain`}>
-            {evolution_chain.url}</Link></li>}
-            {<li><span>base happiness:</span>{base_happiness}</li>}
-            {<li><span>capture rate:</span>{capture_rate}</li>}
-            <li><span>is legendary:</span>{is_legendary ? 'Yes' : 'Not'}</li>
-            {evolves_from_species ? <li><span>evolves from species:</span>{evolves_from_species.name}</li> : null}
-            {egg_groups && <li><span>egg groups:</span>{egg_groups[0].name}</li>}
-            {flavor_text_entries && <li><span>flavor text entries:</span>{flavor_text_entries[42].flavor_text}</li>}
-            {pal_park_encounters && <li><span>pal park encounters:</span>{pal_park_encounters[0].area.name}</li>}
-            {shape && <li><span>shape:</span>{shape.name}</li>}
-            {growth_rate && <li><span>growth rate:</span>{growth_rate.name}</li>}
-            {habitat && <li><span>habitat:</span>{habitat.name}</li>}
-            <li><span>hatch counter:</span>{hatch_counter}</li>
-            <li><span>is baby:</span>{is_baby ? 'Yes' : 'Not'}</li>
-            <li><span>is main series:</span>{is_main_series ? 'Yes' : 'Not'}</li>
-            <li><span>is mythical:</span>{is_mythical ? 'Yes' : 'Not'}</li>
-            {effect_changes && effect_changes.length ? <li><h3><span>effect changes:</span></h3>
-            <br/>
-            <span>effect entries:</span>{effect_changes[0].effect_entries[1].effect}
-            <br/>
-            <span>version group:</span>{effect_changes[0].version_group.name}
-            <br/>
-            {effect_changes[1] && <div>
-                <span>effect entries:</span>{effect_changes[1].effect_entries[1].effect}
-                <br/>
-                <span>version group:</span>{effect_changes[1].version_group.name}
-            </div>}
-            </li> : null}
+            {renederItems}
         </ul>
     )
 }
