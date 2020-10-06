@@ -50,17 +50,17 @@ function PokemoList ({ name, color, effect_entries, evolution_chain, base_happin
                     case typeof value === "object" && !Array.isArray(value) && key !== 'evolution_chain':
                         return (
                             <li key={key}>
-                                <span>{key}:</span>{value.name}
+                                <span>{key.split('_').join('\t')}:</span>{value.name}
                             </li>
                         );
 
                     case key === 'evolution_chain':
-                        return <li key={key}><span>{key}:</span><Link to={`/pokemon-list/${match.params.id}/evolution-chain`}>{value.url}</Link></li>
+                        return <li key={key}><span>{key.split('_').join('\t')}:</span><Link to={`/pokemon-list/${match.params.id}/evolution-chain`}>{value.url}</Link></li>
 
                     case key === 'effect_entries':
                         return (
                             <li key={key}>
-                                <span>{key}:</span>{value[1].short_effect}
+                                <span>{key.split('_').join('\t')}:</span>{value[1].short_effect}
                             </li>
                         );
 
@@ -68,38 +68,38 @@ function PokemoList ({ name, color, effect_entries, evolution_chain, base_happin
                         if (value.length > 1) {
                             return (
                                 <li key={key}>
-                                    <span>{key}:</span>{`${value[0].name}/${value[1].name}`}
+                                    <span>{key.split('_').join('\t')}:</span>{`${value[0].name}/${value[1].name}`}
                                 </li>
                             )
                         }
                         return (
                             <li key={key}>
-                                <span>{key}:</span>{value[0].name}
+                                <span>{key.split('_').join('\t')}:</span>{value[0].name}
                             </li>
                         );
 
                     case key === 'flavor_text_entries':
                         return (
                             <li key={key}>
-                                <span>{key}:</span>{value[42].flavor_text}
+                                <span>{key.split('_').join('\t')}:</span>{value[42].flavor_text}
                             </li>
                         );
 
                     case key === 'pal_park_encounters':
                         return (
                             <li key={key}>
-                                <span>{key}:</span>{value[0].area.name}
+                                <span>{key.split('_').join('\t')}:</span>{value[0].area.name}
                             </li>
                         );
 
                     case typeof value === 'boolean':
-                        return <li key={key}><span>{key}:</span>{value ? 'Yes' : 'Not'}</li>
+                        return <li key={key}><span>{key.split('_').join('\t')}:</span>{value ? 'Yes' : 'Not'}</li>
 
                     case key === 'effect_changes':
                         return (
                             <li key={key}>
                                 <br/>
-                                <h3><span>{key}:</span></h3>
+                                <h3><span>{key.split('_').join('\t')}:</span></h3>
                                 <br/>
                                 <span>effect entries:</span>{value[0].effect_entries[1].effect}
                                 <br/>
@@ -114,7 +114,7 @@ function PokemoList ({ name, color, effect_entries, evolution_chain, base_happin
                         );
 
                     default:
-                        return <li key={key}><span>{key}:</span>{value}</li>
+                        return <li key={key}><span>{key.split('_').join('\t')}:</span>{value}</li>
                 }
             });
             
