@@ -13,7 +13,7 @@ export default class App extends Component {
                 <Router>
                       <Switch>
                           <Route exact path="/">
-                            <Redirect to="/pokemon-list"/>
+                              <Redirect to="/pokemon-list"/>
                           </Route>
                           <Route exact path="/pokemon-list" component={PokemonList}/>
                           <Route exact path="/pokemon-list/:id" component={PokemonItem}/>
