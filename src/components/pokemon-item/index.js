@@ -26,22 +26,17 @@ export const PokemonItem = ({ match }) => {
     return (
         <Fragment>
             <ToHome/>
-            <PokemoList {...pokemon_item}/>
+            <PokemoList pokemon_item={pokemon_item}/>
         </Fragment>
     )
 }
 
-function PokemoList ({ name, color, effect_entries, evolution_chain, base_happiness,
-    capture_rate, is_legendary, evolves_from_species, egg_groups, flavor_text_entries,
-    pal_park_encounters, shape, growth_rate, habitat, hatch_counter, is_baby, is_main_series,
-    is_mythical, effect_changes }) {
+function PokemoList ({ pokemon_item }) {
         
+        const { id, gender_rate, form_descriptions, genera, names, pokedex_numbers, pokemon, varieties, ...rest } = pokemon_item;
         const match = useRouteMatch('/pokemon-list/:id');
 
-        const renederPokemon = Object.entries({ name, color, effect_entries, evolution_chain, base_happiness,
-            capture_rate, is_legendary, evolves_from_species, egg_groups, flavor_text_entries,
-            pal_park_encounters, shape, growth_rate, habitat, hatch_counter, is_baby, is_main_series,
-            is_mythical, effect_changes }).map(([key, value]) => {
+        const renederPokemon = Object.entries(rest).map(([key, value]) => {
 
                 const title = key.split('_').join('\t');
 
